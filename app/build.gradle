@@ -23,7 +23,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"https://gateway.marvel.com:443\""
         buildConfigField "String", "MARVEL_PRIVATE_API_KEY", apikeyProperties['privatekey']
         buildConfigField "String", "MARVEL_PUBLIC_API_KEY", apikeyProperties['publickey']
     }
@@ -50,6 +49,37 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        development {
+            dimension "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix '-dev'
+            ext {
+                wsUrl = "https://gateway.marvel.com:443/"
+            }
+        }
+
+        production {
+            dimension "environment"
+            applicationIdSuffix = ".prod"
+            versionNameSuffix '-prod'
+            ext {
+                wsUrl = "https://gateway.marvel.com:443/"
+            }
+        }
+
+        applicationVariants.all { variant ->
+
+            def dimensions = variant.productFlavors
+            def environment = dimensions[0]
+
+            def wsUrl = environment.ext.wsUrl
+
+            variant.buildConfigField "String", "WSUrl", "\"$wsUrl\""
+        }
     }
 }
 
