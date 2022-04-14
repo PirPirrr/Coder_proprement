@@ -12,6 +12,7 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 */
 android {
+    compileSdk 31
 
     signingConfigs {
         production {
@@ -22,12 +23,11 @@ android {
         }
     }
 
-    compileSdkVersion 31
-
     defaultConfig {
         applicationId "com.example.coderproprement"
         minSdk 21
         targetSdk 31
+
         def buildNumber = Integer.parseInt(property("version.buildNumber"))
         def major = Integer.parseInt(property("version.major"))
         def minor = Integer.parseInt(property("version.minor"))
