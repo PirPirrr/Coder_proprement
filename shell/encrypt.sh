@@ -9,9 +9,9 @@
 # - $3 : Output file
 #
 # @Error
-# - 11 : No password
+# - 11 : No input file found
 # - 12 : No output file defined
-# - 13 : No input file found
+# - 13 : No password
 ##
 
 # Test if the first arg is not empty
@@ -24,14 +24,17 @@ if [ -z "${2}" ]; then
   exit 12
 fi
 
+# Test if the third arg is not empty
 if [ -z "${3}" ]; then
   exit 13
 fi
+
+
 
 gpg -c \
      --quiet \
      --batch \
      --armor \
-     --passphrase "${1}" \
+     --passphrase "${3}" \
      --output "${2}" \
-     "${3}"
+     "${1}"

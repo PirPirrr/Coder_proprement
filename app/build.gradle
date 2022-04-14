@@ -73,7 +73,6 @@ android {
             versionNameSuffix '-prod'
             buildConfigField "String", "WSUrl", "\"https://gateway.marvel.com:443/\""
         }
-
     }
 
     buildFeatures {
