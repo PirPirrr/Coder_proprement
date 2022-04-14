@@ -1,11 +1,19 @@
-name: Greeting
+name: Workflow - Feature
 on:
   push:
     branches:
       - 'feature/*'
 jobs:
-  print_hello_world:
+  build_apk:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: echo "Hello, World????"
+      - run: chmod +x graldew
+      - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_P12 }}"> "keystore.p12"
+      - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_PROPERTIES }}"> "keystore.properties"
+      - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.APIKEY_PROPERTIES }}"> "apikey.properties"
+      - run: ./gradlew -Pversion.buildNumber="${GITHUB_RUN_NUMBER}" assembleDevelopmentRelease
+      - uses: actions/upload-artifact@v3
+        with:
+          name: development-release-apk
+          path: app/build/outputs/apk/development/release/app-development-release.apk

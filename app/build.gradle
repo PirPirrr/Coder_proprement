@@ -6,11 +6,11 @@ plugins {
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
+/*
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
-
+*/
 android {
     compileSdk 31
 
@@ -18,21 +18,38 @@ android {
         applicationId "com.example.coderproprement"
         minSdk 21
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        def buildNumber = Integer.parseInt(property("version.buildNumber"))
+        def major = Integer.parseInt(property("version.major"))
+        def minor = Integer.parseInt(property("version.minor"))
+        def patch = Integer.parseInt(property("version.patch"))
+        versionCode buildNumber
+        versionName "${major}.${minor}.${patch}-b${buildNumber}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "MARVEL_PRIVATE_API_KEY", apikeyProperties['privatekey']
-        buildConfigField "String", "MARVEL_PUBLIC_API_KEY", apikeyProperties['publickey']
+/*        buildConfigField "String", "MARVEL_PRIVATE_API_KEY", apikeyProperties['privatekey']
+        buildConfigField "String", "MARVEL_PUBLIC_API_KEY", apikeyProperties['publickey']*/
+
+
     }
 
     signingConfigs {
+        debug {
+            keyPassword 'KQp3V8j5jT8g'
+            keyAlias 'debug'
+            storePassword 'KQp3V8j5jT8g'
+            storeFile file('/Users/lpiem/Documents/coderproprmenet/keystore.p12')
+        }
         production {
+            storePassword 'KQp3V8j5jT8g'
+            keyPassword 'KQp3V8j5jT8g'
+            keyAlias 'production'
+            storeFile file('/Users/lpiem/Documents/coderproprmenet/keystore.p12')
+
             storePassword keystoreProperties['storePassword']
-            keyPassword keystoreProperties['keyPassword']
-            keyAlias keystoreProperties['keyAlias']
-            storeFile file(keystoreProperties['storeFile'])
+             keyPassword keystoreProperties['keyPassword']
+             keyAlias keystoreProperties['keyAlias']
+             storeFile file(keystoreProperties['storeFile'])
         }
     }
 
@@ -50,6 +67,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 
     flavorDimensions "environment"
     productFlavors {
