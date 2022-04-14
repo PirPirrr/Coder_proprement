@@ -9,9 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: chmod +x gradlew
-      - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_P12 }}"> "keystore.p12"
-      - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_PROPERTIES }}"> "keystore.properties"
-      - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.APIKEY_PROPERTIES }}"> "apikey.properties"
+      - run: |
+          KEYSTORE_P12_ASC_FILE="keystore.asc"
+          echo "${{ secrets.KEYSTORE_P12}}">>"${{KEYSTORE_P12_ASC_FILE}}"
+          gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_P12 }}"> "keystore.p12"
+      - run: |
+          KEYSTORE_PROPERTIES_ASC_FILE="keystore_properties.asc"
+          echo "${{ secrets.KEYSTORE_PROPERTIES}}">>"${{KEYSTORE_PROPERTIES_ASC_FILE}}"
+          gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_PROPERTIES }}"> "keystore.properties"
+      - run: |
+          APIKEY_PROPERTIES_ASC_FILE="keystore.asc"
+          echo "${{ secrets.APIKEY_PROPERTIES}}">>"${{APIKEY_PROPERTIES_ASC_FILE}}"
+          gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.APIKEY_PROPERTIES }}"> "apikey.properties"
       - run: ./gradlew -Pversion.buildNumber="${GITHUB_RUN_NUMBER}" assembleDevelopmentRelease
       - uses: actions/upload-artifact@v3
         with:
