@@ -22,7 +22,7 @@ android {
         }
     }
 
-    compileSdk 31
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.example.coderproprement"
@@ -39,8 +39,6 @@ android {
 
 /*        buildConfigField "String", "MARVEL_PRIVATE_API_KEY", apikeyProperties['privatekey']
         buildConfigField "String", "MARVEL_PUBLIC_API_KEY", apikeyProperties['publickey']*/
-
-
     }
 
 
