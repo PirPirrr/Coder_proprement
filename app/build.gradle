@@ -12,6 +12,16 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 */
 android {
+
+    signingConfigs {
+        production {
+            storePassword keystoreProperties['storePassword']
+            keyPassword keystoreProperties['keyPassword']
+            keyAlias keystoreProperties['keyAlias']
+            storeFile file(keystoreProperties['storeFile'])
+        }
+    }
+
     compileSdk 31
 
     defaultConfig {
@@ -33,20 +43,6 @@ android {
 
     }
 
-    signingConfigs {
-        debug {
-            storePassword keystoreProperties['storePassword']
-            keyPassword keystoreProperties['keyPassword']
-            keyAlias keystoreProperties['keyAlias']
-            storeFile file(keystoreProperties['storeFile'])
-        }
-        production {
-            storePassword keystoreProperties['storePassword']
-            keyPassword keystoreProperties['keyPassword']
-            keyAlias keystoreProperties['keyAlias']
-            storeFile file(keystoreProperties['storeFile'])
-        }
-    }
 
     buildTypes {
         release {
@@ -70,30 +66,18 @@ android {
             dimension "environment"
             applicationIdSuffix = ".dev"
             versionNameSuffix '-dev'
-            ext {
-                wsUrl = "https://gateway.marvel.com:443/"
-            }
+            buildConfigField "String", "WSUrl", "\"https://gateway.marvel.com:443/\""
         }
 
         production {
             dimension "environment"
             applicationIdSuffix = ".prod"
             versionNameSuffix '-prod'
-            ext {
-                wsUrl = "https://gateway.marvel.com:443/"
-            }
+            buildConfigField "String", "WSUrl", "\"https://gateway.marvel.com:443/\""
         }
 
-        applicationVariants.all { variant ->
-
-            def dimensions = variant.productFlavors
-            def environment = dimensions[0]
-
-            def wsUrl = environment.ext.wsUrl
-
-            variant.buildConfigField "String", "WSUrl", "\"$wsUrl\""
-        }
     }
+
     buildFeatures {
         viewBinding true
     }
