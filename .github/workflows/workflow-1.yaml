@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: chmod +x ./graldew
+      - run: chmod +x graldew
       - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_P12 }}"> "keystore.p12"
       - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.KESYTORE_PROPERTIES }}"> "keystore.properties"
       - run: gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${{ secrets.APIKEY_PROPERTIES }}"> "apikey.properties"
