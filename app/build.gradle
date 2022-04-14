@@ -42,9 +42,9 @@ android {
         }
         production {
             storePassword keystoreProperties['storePassword']
-             keyPassword keystoreProperties['keyPassword']
-             keyAlias keystoreProperties['keyAlias']
-             storeFile file(keystoreProperties['storeFile'])
+            keyPassword keystoreProperties['keyPassword']
+            keyAlias keystoreProperties['keyAlias']
+            storeFile file(keystoreProperties['storeFile'])
         }
     }
 
