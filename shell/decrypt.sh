@@ -17,6 +17,7 @@ if [ -z "${2}" ]; then
   exit 12
 fi
 
+# Test if the second arg is not empty
 if [ -z "${3}" ]; then
   exit 13
 fi
