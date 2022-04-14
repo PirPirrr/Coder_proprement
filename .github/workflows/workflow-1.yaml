@@ -21,7 +21,7 @@ jobs:
           APIKEY_PROPERTIES_ASC_FILE="apikey_properties.asc"
           echo "${{ secrets.APIKEY_PROPERTIES}}">>"${APIKEY_PROPERTIES_ASC_FILE}"
           gpg -d --batch -passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${APIKEY_PROPERTIES_ASC_FILE}"> "apikey.properties"
-      - run: ./gradlew -Pversion.buildNumber="${GITHUB_RUN_NUMBER}" assembleDevelopmentRelease
+      - run: ./gradlew -Pversion.buildNumber="$GITHUB_RUN_NUMBER" assembleDevelopmentRelease
       - uses: actions/upload-artifact@v3
         with:
           name: development-release-apk
