@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: chmod +x gradlew
-      - uses: actions/run_tests
+      - uses: ./.github/actions/run_tests
