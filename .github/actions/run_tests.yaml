@@ -1,0 +1,7 @@
+name: Run tests
+description: Run all tests of this project
+runs:
+  using: "composite"
+  steps:
+    - run: ./gradlew test
+      shell: bash

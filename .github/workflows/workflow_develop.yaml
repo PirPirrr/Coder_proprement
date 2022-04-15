@@ -1,0 +1,17 @@
+name: Workflow - Develop
+on:
+  push:
+    branches:
+      - 'develop'
+jobs:
+  build_apk:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - run: chmod +x gradlew
+      - uses: actions/run_tests
+      - uses: actions/build_apk
+      - uses: actions/upload-artifact@v3
+        with:
+          name: development-release-apk
+          path: app/build/outputs/apk/development/release/app-development-release.apk
