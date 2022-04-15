@@ -19,7 +19,7 @@ android {
             storePassword keystoreProperties['storePassword']
             keyPassword keystoreProperties['keyPassword']
             keyAlias keystoreProperties['keyAlias']
-            storeFile file("../keystore.p12")
+            storeFile file(keystoreProperties['storeFile'])
         }
     }
 
