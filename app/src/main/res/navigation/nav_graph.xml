@@ -6,7 +6,7 @@
     app:startDestination="@id/characterListFragment">
     <fragment
         android:id="@+id/characterListFragment"
-        android:name="com.example.coderproprement.ui.CharacterListFragment"
+        android:name="com.example.coderproprement.ui.fragment.CharacterListFragment"
         android:label="character_list_fragment"
         tools:layout="@layout/character_list_fragment" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailCharacterFragment"
-        android:name="com.example.coderproprement.ui.DetailCharacterFragment"
+        android:name="com.example.coderproprement.ui.fragment.DetailCharacterFragment"
         android:label="detail_character_fragment"
         tools:layout="@layout/detail_character_fragment" >
         <action

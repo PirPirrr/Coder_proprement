@@ -1,4 +1,4 @@
-package com.example.coderproprement.ui
+package com.example.coderproprement.ui.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.coderproprement.R
+import com.example.coderproprement.ui.CharacterListViewModel
 
 class CharacterListFragment : Fragment() {
 
