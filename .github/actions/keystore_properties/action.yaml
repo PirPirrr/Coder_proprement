@@ -1,0 +1,10 @@
+name: Keystore Properties
+description: Get keystore properties from secret on github
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        KEYSTORE_PROPERTIES_ASC_FILE="keystore_properties.asc"
+        echo "${{ secrets.KEYSTORE_PROPERTIES}}">>"${KEYSTORE_PROPERTIES_ASC_FILE}"
+        gpg -d --batch --passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${KEYSTORE_PROPERTIES_ASC_FILE}"> "keystore.properties"
+      shell: bash

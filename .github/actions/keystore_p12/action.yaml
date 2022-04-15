@@ -1,0 +1,10 @@
+name: Keystore P12
+description: Get keystore p12 from secret on github
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        KEYSTORE_P12_ASC_FILE="keystore.asc"
+        echo "${{ secrets.KEYSTORE_P12}}">>"${KEYSTORE_P12_ASC_FILE}"
+        gpg -d --batch --passphrase "$(echo "${{ secrets.PASSWORD }}" | base64 --decode)" "${KEYSTORE_P12_ASC_FILE}"> "keystore.p12"
+      shell: bash
