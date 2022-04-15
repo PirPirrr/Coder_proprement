@@ -22,4 +22,4 @@ if [ -z "${3}" ]; then
   exit 13
 fi
 
-gpg -d --batch -passphrase "${1}" "${2}"> "${3}"
+gpg -d --batch --passphrase "${1}" "${2}"> "${3}"
