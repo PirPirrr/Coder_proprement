@@ -26,7 +26,6 @@ class CharacterListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CharacterListViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
