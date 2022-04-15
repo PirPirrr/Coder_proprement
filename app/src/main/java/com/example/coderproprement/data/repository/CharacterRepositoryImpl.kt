@@ -1,9 +1,13 @@
 package com.example.coderproprement.data.repository
 
 import com.example.coderproprement.data.datasource.CharacterRemoteDataSource
+import fr.quentin.android3.model.Item
 
 class CharacterRepositoryImpl(
-    characterRemoteDataSource: CharacterRemoteDataSource
+    private var characterRemoteDataSource: CharacterRemoteDataSource
 ): CharacterRepository {
+    override suspend fun getPaginatedCharacter(): Item {
+        return characterRemoteDataSource.getAllCharacter()
+    }
 
 }

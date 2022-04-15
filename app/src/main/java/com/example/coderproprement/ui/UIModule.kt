@@ -8,7 +8,6 @@ object UIModule {
         viewModel {
             CharacterListViewModel(get())
         }
-
     }
     val all = arrayOf(characterListModule)
 }

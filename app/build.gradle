@@ -6,11 +6,11 @@ plugins {
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-/*
+
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
-*/
+
 android {
     compileSdk 31
 
@@ -35,10 +35,10 @@ android {
         versionCode buildNumber
         versionName "${major}.${minor}.${patch}-b${buildNumber}"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "MARVEL_PRIVATE_API_KEY", apikeyProperties['privatekey']
+        buildConfigField "String", "MARVEL_PUBLIC_API_KEY", apikeyProperties['publickey']
 
-/*        buildConfigField "String", "MARVEL_PRIVATE_API_KEY", apikeyProperties['privatekey']
-        buildConfigField "String", "MARVEL_PUBLIC_API_KEY", apikeyProperties['publickey']*/
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
 
