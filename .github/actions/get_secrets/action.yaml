@@ -1,0 +1,33 @@
+name: Get secrets
+description: Get secrets from github
+inputs:
+  password:
+    description: 'Password from secrets'
+    required: true
+  apikey_properties:
+    description: 'apikey properties from secrets'
+    required: true
+  keystore_p12:
+    description: 'keystore P12 from secrets'
+    required: true
+  keystore_properties:
+    description: 'Keystore properties from secrets'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        APIKEY_PROPERTIES_ASC_FILE="apikey_properties.asc"
+        echo "${{ inputs.apikey_properties }}">>"${APIKEY_PROPERTIES_ASC_FILE}"
+        gpg -d --batch --passphrase "$(echo "${{ inputs.password }}" | base64 --decode)" "${APIKEY_PROPERTIES_ASC_FILE}"> "apikey.properties"
+      shell: bash
+    - run: |
+        KEYSTORE_P12_ASC_FILE="keystore.asc"
+        echo "${{ inputs.keystore_p12 }}">>"${KEYSTORE_P12_ASC_FILE}"
+        gpg -d --batch --passphrase "$(echo "${{ inputs.password }}" | base64 --decode)" "${KEYSTORE_P12_ASC_FILE}"> "keystore.p12"
+      shell: bash
+    - run: |
+        KEYSTORE_PROPERTIES_ASC_FILE="keystore_properties.asc"
+         echo "${{ inputs.keystore_properties}}">>"${KEYSTORE_PROPERTIES_ASC_FILE}"
+         gpg -d --batch --passphrase "$(echo "${{ inputs.password }}" | base64 --decode)" "${KEYSTORE_PROPERTIES_ASC_FILE}"> "keystore.properties"
+      shell: bash

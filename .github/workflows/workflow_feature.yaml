@@ -9,7 +9,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: chmod +x gradlew
-      - uses: ./.github/actions/keystore_p12
-      - uses: ./.github/actions/keystore_properties
-      - uses: ./.github/actions/apikey_properties
+      - uses: ./.github/actions/get_secrets
       - uses: ./.github/actions/run_tests
