@@ -10,4 +10,8 @@ class CharacterRepositoryImpl(
         return characterRemoteDataSource.getAllCharacter()
     }
 
+    override suspend fun getCharacter(id: String): Item {
+        return characterRemoteDataSource.getCharacter(id)
+    }
+
 }

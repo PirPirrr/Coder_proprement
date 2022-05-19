@@ -4,4 +4,6 @@ import fr.quentin.android3.model.Item
 
 interface CharacterRemoteDataSource {
     suspend fun getAllCharacter(): Item
+
+    suspend fun getCharacter(id: String): Item
 }

@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 class CharacterListViewModel(
     private var getAllCharacterUseCase: GetAllCharacterUseCase
 ) : ViewModel() {
+    var idCharacter = ""
+
     fun allCharacters(): MutableLiveData<Item>{
         val listItem = MutableLiveData<Item>()
         viewModelScope.launch {
@@ -17,4 +19,5 @@ class CharacterListViewModel(
         }
         return listItem
     }
+
 }

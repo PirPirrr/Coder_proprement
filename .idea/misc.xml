@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/quent/Documents/LP/coderproprement/app/src/main/res/layout-v26/detail_character_fragment.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/quent/Documents/LP/coderproprement/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/quent/Documents/LP/coderproprement/app/src/main/res/layout/character.xml" value="0.33" />
-        <entry key="..\:/Users/quent/Documents/LP/coderproprement/app/src/main/res/layout/character_list_fragment.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/quent/Documents/LP/coderproprement/app/src/main/res/layout/character_list_fragment.xml" value="0.17" />
         <entry key="..\:/Users/quent/Documents/LP/coderproprement/app/src/main/res/layout/detail_character_fragment.xml" value="0.17603850050658562" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/character.xml" value="0.36354166666666665" />

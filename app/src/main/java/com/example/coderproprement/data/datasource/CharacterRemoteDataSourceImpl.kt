@@ -10,4 +10,8 @@ class CharacterRemoteDataSourceImpl(
         return characterService.getCharacters()
     }
 
+    override  suspend fun getCharacter(id: String): Item{
+        return characterService.getCharacter(id)
+    }
+
 }
