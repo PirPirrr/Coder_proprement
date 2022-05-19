@@ -21,7 +21,6 @@ class MarvelInterceptor : Interceptor {
                 ("$ts${BuildConfig.MARVEL_PRIVATE_API_KEY}${BuildConfig.MARVEL_PUBLIC_API_KEY}").md5()
             )
             .build()
-        println(url.toString())
         val requestBuilder = original.newBuilder()
             .url(url)
             .build()

@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.coderproprement.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.coderproprement.ui.CharacterListViewModel
+import com.example.coderproprement.ui.adapter.AdapterMarvel
 
 class CharacterListFragment : Fragment() {
 
@@ -19,13 +22,19 @@ class CharacterListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel.allCharacters()
-        return inflater.inflate(R.layout.character_list_fragment, container, false)
-    }
+        val root = inflater.inflate(R.layout.character_list_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        val observer = viewModel.allCharacters()
+        val recyclerView = root.findViewById<RecyclerView>(R.id.marvelRecyclerView)
 
+        observer.observe(viewLifecycleOwner){
+            val adapter = AdapterMarvel(it)
+            root.let { it1 -> recyclerView?.findContainingItemView(it1) }
+            val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+            recyclerView?.layoutManager = layoutManager
+            recyclerView?.adapter = adapter
+        }
+        return root
     }
 
 }
